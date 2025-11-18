@@ -3,7 +3,9 @@ main = "src/index.js"
 compatibility_date = "2024-01-01"
 account_id = "fffa4b4363a7e5250af8357087263b3a"  # Storacha Network
 
-# Production Environment
+##################################################
+########### Production Environment ###############
+##################################################
 [env.production]
 name = "egress-consumer-production"
 
@@ -17,13 +19,15 @@ dead_letter_queue = "egress-dlq-production"
 [env.production.vars]
 UPLOAD_API_URL = "https://up.storacha.network"
 
-# Staging Environment
+##################################################
+########### Staging Environment ##################
+##################################################
 [env.staging]
 name = "egress-consumer-staging"
 
 [[env.staging.queues.consumers]]
 queue = "egress-tracking-queue-staging"
-max_batch_size = 50
+max_batch_size = 3
 max_batch_timeout = 30
 max_retries = 3
 dead_letter_queue = "egress-dlq-staging"

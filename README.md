@@ -38,17 +38,17 @@ pnpm install
 
 ### Run locally
 ```sh
-pnpm run dev
+npx wrangler dev
 ```
 
 ### Deploy to Cloudflare (staging)
 ```sh
-pnpm run deploy -- -e staging
+npx wrangler deploy -e staging
 ```
 
 ### Deploy to Cloudflare (production)
 ```sh
-pnpm run deploy -- -e production
+npx wrangler deploy -e production
 ```
 
 ## Performance
