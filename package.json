@@ -1,0 +1,28 @@
+{
+  "name": "egress-consumer",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker to consume egress tracking events and batch them to upload-api",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@ipld/dag-json": "^10.2.5",
+    "@ucanto/core": "^10.0.1",
+    "@ucanto/transport": "^9.1.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.36.0"
+  },
+  "keywords": [
+    "cloudflare-workers",
+    "egress-billing",
+    "ucan",
+    "storacha"
+  ],
+  "author": "Storacha Team",
+  "license": "MIT",
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
+}
