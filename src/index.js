@@ -63,6 +63,11 @@ async function sendBatched(events, env) {
     body: await createBatchedCAR(events)
   })
   console.log(`Sent batch of ${events.length} to ${env.UPLOAD_API_URL}`)
+  console.log(`Response status: ${response.status} ${response.statusText}`)
+  
+  // Log response body for debugging
+  const responseText = await response.text()
+  console.log(`Response body: ${responseText}`)
   
   if (!response.ok) {
     throw new Error(`Upload-API batch error: ${response.status} ${response.statusText}`)
