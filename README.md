@@ -21,13 +21,13 @@ Freeway → CF Queue (serialized invocations) → Egress Consumer → Upload-API
 
 - `UPLOAD_API_URL`: URL of the upload-api service (default: https://up.storacha.network)
 
-### Queue Configuration
+### Egress Consumer (Production)
 
-- **Queue**: `egress-tracking-queue`
-- **Batch size**: 50 invocations (conservative for Lambda timeout)
-- **Timeout**: 30 seconds
-- **Retries**: 3 attempts
-- **Dead letter queue**: `egress-dlq`
+- **Batch Size**: 100 messages (`max_batch_size = 100`) - Increased to maximum
+- **Batch Timeout**: 60 seconds (`max_batch_timeout = 60`) - Increased to maximum
+- **CPU Time**: 300,000 ms (5 minutes) - Increased to maximum
+- **Max Retries**: 3
+- **Dead Letter Queue**: `egress-dlq-production`
 
 ## Development
 
@@ -51,6 +51,10 @@ npx wrangler deploy -e staging
 npx wrangler deploy -e production
 ```
 
-## Performance
-
-TBD
+### Complete Architecture Flow
+1. **Freeway** → Cloudflare Queue (`egress-tracking-queue-production`)
+2. **Egress Consumer** → Batches messages into CAR file → **POST to `/ucan` endpoint**
+3. **Upload-API `/ucan` endpoint** → AWS Kinesis Stream (`ucan-stream-v2`)
+4. **Kinesis Stream** → Lambda (`ucan-invocation-router`) → Processes UCAN invocations
+5. **Upload-API handler** → AWS SQS Queue (`egress-traffic-queue`) for each egress event
+6. **Billing System** → DynamoDB (`egress-traffic` table) → Stripe Billing Meter API
