@@ -11,10 +11,13 @@ name = "egress-consumer-production"
 
 [[env.production.queues.consumers]]
 queue = "egress-tracking-queue-production"
-max_batch_size = 50
-max_batch_timeout = 30
+max_batch_size = 100  # Increased from 50 to max limit
+max_batch_timeout = 60  # Increased from 30 to max (60 seconds)
 max_retries = 3
 dead_letter_queue = "egress-dlq-production"
+
+[env.production.limits]
+cpu_ms = 300000  # 5 minutes (max CPU time)
 
 [env.production.vars]
 UPLOAD_API_URL = "https://up.storacha.network"
