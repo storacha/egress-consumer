@@ -16,9 +16,6 @@ max_batch_timeout = 60  # Increased from 30 to max (60 seconds)
 max_retries = 3
 dead_letter_queue = "egress-dlq-production"
 
-[env.production.limits]
-cpu_ms = 300000  # 5 minutes (max CPU time)
-
 [env.production.vars]
 UPLOAD_API_URL = "https://up.storacha.network"
 
